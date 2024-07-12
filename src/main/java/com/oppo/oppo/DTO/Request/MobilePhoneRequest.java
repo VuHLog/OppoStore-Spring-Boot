@@ -1,81 +1,57 @@
-package com.oppo.oppo.Entities;
+package com.oppo.oppo.DTO.Request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.oppo.oppo.Entities.Category;
+import com.oppo.oppo.Entities.OrderDetail;
+import com.oppo.oppo.Entities.Variants;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
 @Builder
-@Table
-public class MobilePhone {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column
-    private String id;
-
-    @Column
+public class MobilePhoneRequest {
     private String name;
 
-    @Column
     private String frontCamera;
 
-    @Column
     private String rearCamera;
 
-    @Column
     private String CPU;
 
-    @Column
     private int battery;
 
-    @Column
     private String screen;
 
-    @Column
     private String resolution;
 
-    @Column
     private int RAM;
 
-    @Column
     private String memoryStick;
 
-    @Column
     private String sim;
 
-    @Column
     private String operatingSystem;
 
-    @Column
     private String size;
 
-    @Column
     private String weight;
 
-    @Column
     private int charger;
 
-    @Column
     private String brand;
 
-    @Column
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "mobilePhone",cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH}, orphanRemoval = true)
-    @JsonIgnore
     private Set<Variants> variants;
 
-    @OneToMany(mappedBy = "mobilePhone")
-    @JsonIgnore
     private Set<OrderDetail> orderDetails;
 }

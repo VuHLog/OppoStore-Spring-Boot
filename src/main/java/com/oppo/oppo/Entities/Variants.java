@@ -22,6 +22,9 @@ public class Variants {
     @Column
     private int price;
 
+    @Column
+    private String image;
+
     @ManyToOne
     @JoinColumn(name = "mobilePhone_id")
     private MobilePhone mobilePhone;

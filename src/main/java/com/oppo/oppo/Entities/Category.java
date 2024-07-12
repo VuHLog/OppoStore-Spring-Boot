@@ -13,16 +13,16 @@ import java.util.Set;
 @Setter
 @Builder
 @Table
-public class Status {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column
     private String id;
 
     @Column
-    private String status;
+    private String name;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "category")
     @JsonIgnore
-    private Set<Orders> orders;
+    private Set<MobilePhone> mobilePhones;
 }

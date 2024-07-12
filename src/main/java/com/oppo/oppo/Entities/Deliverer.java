@@ -1,5 +1,6 @@
 package com.oppo.oppo.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,6 @@ public class Deliverer {
     private String phone;
 
     @OneToMany(mappedBy = "deliverer")
-    private Set<Order> orders;
+    @JsonIgnore
+    private Set<Orders> orders;
 }

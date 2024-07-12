@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Builder
 @Table
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column
@@ -41,7 +41,7 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "orders")
     @JsonIgnore
     private Set<OrderDetail> orderDetails;
 }

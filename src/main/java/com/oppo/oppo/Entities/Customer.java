@@ -33,5 +33,5 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
-    private Set<Order> orders;
+    private Set<Orders> orders;
 }

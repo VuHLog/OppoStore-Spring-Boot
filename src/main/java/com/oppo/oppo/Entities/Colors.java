@@ -22,9 +22,6 @@ public class Colors {
     @Column
     private String name;
 
-    @Column
-    private String image;
-
     @OneToMany(mappedBy = "color")
     @JsonIgnore
     private Set<Variants> variants;
