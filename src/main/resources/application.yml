@@ -26,6 +26,17 @@ spring:
         provider:
           google:
             issuer-uri: https://accounts.google.com
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: vuhlong2610@gmail.com
+    password: ojzlsupaywsivfun
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 jwt:
   signerKey: "ZcCAeQKy0ly5bPdCVHM8bLQp5KJX9eczTqZl7zhjzK42U7SXfALZcWpSjitA5tLX"
