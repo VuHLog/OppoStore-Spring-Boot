@@ -23,8 +23,8 @@ public class OrderDetail {
     private int price;
 
     @ManyToOne
-    @JoinColumn(name = "mobilePhone_id")
-    private MobilePhone mobilePhone;
+    @JoinColumn(name = "variant_id")
+    private Variants variant;
 
     @ManyToOne
     @JoinColumn(name = "order_id")

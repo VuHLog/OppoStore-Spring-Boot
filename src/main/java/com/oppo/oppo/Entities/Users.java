@@ -37,6 +37,10 @@ public class Users {
 
     private String avatarUrl;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<Customer> customers;
+
 //    @OneToMany(mappedBy = "user" )
 //    @JsonIgnore
 //    private List<Comments> comments;

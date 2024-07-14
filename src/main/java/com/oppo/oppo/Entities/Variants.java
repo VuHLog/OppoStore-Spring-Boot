@@ -1,7 +1,10 @@
 package com.oppo.oppo.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -36,4 +39,8 @@ public class Variants {
     @ManyToOne
     @JoinColumn(name = "ROM_id")
     private ROM ROM;
+
+    @OneToMany(mappedBy = "variant",cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH}, orphanRemoval = true)
+    @JsonIgnore
+    private Set<OrderDetail> orderDetails;
 }

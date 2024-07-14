@@ -34,4 +34,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
     private Set<Orders> orders;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user;
 }

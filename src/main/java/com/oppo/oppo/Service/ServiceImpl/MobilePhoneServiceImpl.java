@@ -47,6 +47,7 @@ public class MobilePhoneServiceImpl implements MobilePhoneService {
     public MobilePhoneResponse updateMobilePhone(String mobilePhoneId, MobilePhoneRequest request) {
         MobilePhone mobilePhone = mobilePhoneRepository.findById(mobilePhoneId).get();
         mobilePhoneMapper.updateMobilePhone(mobilePhone, request);
+        mobilePhone.getVariants().forEach(variants -> variants.setMobilePhone(mobilePhone));
         return mobilePhoneMapper.toMobilePhoneResponse(mobilePhoneRepository.saveAndFlush(mobilePhone));
     }
 

@@ -34,10 +34,6 @@ public class Orders {
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "deliverer_id")
-    private Deliverer deliverer;
-
-    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

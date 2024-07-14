@@ -74,8 +74,4 @@ public class MobilePhone {
     @OneToMany(mappedBy = "mobilePhone",cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH}, orphanRemoval = true)
     @JsonIgnore
     private Set<Variants> variants;
-
-    @OneToMany(mappedBy = "mobilePhone")
-    @JsonIgnore
-    private Set<OrderDetail> orderDetails;
 }
