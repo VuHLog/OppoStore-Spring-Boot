@@ -15,6 +15,10 @@ public interface MobilePhoneService {
     
     public Page<MobilePhoneResponse> getMobilePhonesContains(String s, Pageable pageable);
 
+    public List<MobilePhoneResponse> getBestSeller(int numElement);
+
+    public List<MobilePhoneResponse> getMobilePhoneByCategoryName(String name, int numElement);
+
     public MobilePhoneResponse getById(String id);
 
     public MobilePhoneResponse addMobilePhone(MobilePhoneRequest request);

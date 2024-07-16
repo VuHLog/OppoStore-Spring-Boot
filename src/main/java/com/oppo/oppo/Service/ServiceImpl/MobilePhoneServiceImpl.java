@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +30,16 @@ public class MobilePhoneServiceImpl implements MobilePhoneService {
     @Override
     public Page<MobilePhoneResponse> getMobilePhonesContains(String s, Pageable pageable) {
         return mobilePhoneRepository.findByNameContainsIgnoreCase(s,pageable).map(mobilePhoneMapper::toMobilePhoneResponse);
+    }
+
+    @Override
+    public List<MobilePhoneResponse> getBestSeller(int numElement) {
+        return mobilePhoneRepository.getBestSeller(numElement).stream().map(mobilePhoneMapper::toMobilePhoneResponse).toList();
+    }
+
+    @Override
+    public List<MobilePhoneResponse> getMobilePhoneByCategoryName(String name, int numElement) {
+        return mobilePhoneRepository.findMobilePhoneByCategoryName(name,numElement).stream().map(mobilePhoneMapper::toMobilePhoneResponse).toList();
     }
 
     @Override

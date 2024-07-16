@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/mobilePhones")
 public class MobilePhoneController {
@@ -46,6 +48,22 @@ public class MobilePhoneController {
     public ApiResponse<MobilePhoneResponse> getMobilePhone(@PathVariable String mobilePhoneId) {
         return ApiResponse.<MobilePhoneResponse>builder()
                 .result(mobilePhoneService.getById(mobilePhoneId))
+                .build();
+    }
+
+    @GetMapping("/best-seller")
+    public ApiResponse<List<MobilePhoneResponse>> getBestSeller(@RequestParam(defaultValue = "8") int numElement) {
+        return ApiResponse.<List<MobilePhoneResponse>>builder()
+                .result(mobilePhoneService.getBestSeller(numElement))
+                .build();
+    }
+
+    @GetMapping("/categories")
+    public ApiResponse<List<MobilePhoneResponse>> getMobilePhonesByCategoryName(
+            @RequestParam(name = "name") String name,
+            @RequestParam(defaultValue = "8") int numElement) {
+        return ApiResponse.<List<MobilePhoneResponse>>builder()
+                .result(mobilePhoneService.getMobilePhoneByCategoryName(name,numElement))
                 .build();
     }
 

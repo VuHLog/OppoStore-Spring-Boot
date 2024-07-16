@@ -52,6 +52,4 @@ public class MobilePhoneResponse {
     private Category category;
 
     private Set<Variants> variants;
-
-    private Set<OrderDetail> orderDetails;
 }
