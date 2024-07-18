@@ -36,6 +36,11 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll(pageable).map(orderMapper::toOrderResponse);
     }
 
+    @Override
+    public Page<OrderResponse> getOrdersByStatus(String status, Pageable pageable) {
+        return orderRepository.findByStatus_Status(status,pageable).map(orderMapper::toOrderResponse);
+    }
+
 //    @Override
 //    public Page<OrderResponse> getOrdersContains(String s, Pageable pageable) {
 //        return orderRepository.findByNameContainsIgnoreCase(s,pageable).map(orderMapper::toMobilePhoneResponse);

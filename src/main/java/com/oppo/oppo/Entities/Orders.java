@@ -23,7 +23,7 @@ public class Orders {
     @Column
     private Timestamp createdTime;
 
-    @Column
+    @Column(name = "total_price")
     private int totalPrice;
 
     @Column
