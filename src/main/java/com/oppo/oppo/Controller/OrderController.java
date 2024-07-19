@@ -26,7 +26,7 @@ public class OrderController {
             @RequestParam(name = "field", required = false, defaultValue = "createdTime") String field,
             @RequestParam(name = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
-            @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
+            @RequestParam(name = "sort", required = false, defaultValue = "DESC") String sort,
             @RequestParam(name = "search", required = false, defaultValue = "") String search,
             @RequestParam(name = "status", required = false, defaultValue = "") String status
     ) {
