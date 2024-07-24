@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VariantServiceImpl implements VariantService {
     @Autowired
@@ -45,5 +47,15 @@ public class VariantServiceImpl implements VariantService {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, sortable);
 
         return variantsRepository.findAll(specs, pageable).map(variantMapper::toVariantResponse);
+    }
+
+    @Override
+    public VariantResponse getVariantById(String variantId) {
+        return variantMapper.toVariantResponse(variantsRepository.findById(variantId).get());
+    }
+
+    @Override
+    public List<VariantResponse> getByMobilePhone_IdAndColor_Id(String mobilePhoneId, String colorId) {
+        return variantsRepository.findByMobilePhone_IdAndColor_IdOrderByROM_CapacityAsc(mobilePhoneId,colorId).stream().map(variantMapper::toVariantResponse).toList();
     }
 }

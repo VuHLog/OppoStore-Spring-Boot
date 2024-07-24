@@ -1,5 +1,6 @@
 package com.oppo.oppo.Controller;
 
+import com.oppo.oppo.DTO.Response.ApiResponse;
 import com.oppo.oppo.DTO.Response.MobilePhoneResponse;
 import com.oppo.oppo.DTO.Response.VariantResponse;
 import com.oppo.oppo.Entities.Variants;
@@ -7,10 +8,9 @@ import com.oppo.oppo.Service.MobilePhoneService;
 import com.oppo.oppo.Service.VariantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/variants")
@@ -32,6 +32,20 @@ public class VariantController {
     ) {
 
         return variantService.getVariants(field,pageNumber,pageSize,sort, smallPrice, bigPrice,ram,rom,charge);
+    }
+
+    @GetMapping("/{variantId}")
+    public ApiResponse<VariantResponse> getVariantById(@PathVariable String variantId) {
+        return ApiResponse.<VariantResponse>builder()
+                .result(variantService.getVariantById(variantId))
+                .build();
+    }
+
+    @GetMapping("/{mobilePhoneId}/{colorId}")
+    public ApiResponse<List<VariantResponse>> getVariantByMobilePhone_IdAndColor_Id(@PathVariable String mobilePhoneId, @PathVariable String colorId) {
+        return ApiResponse.<List<VariantResponse>>builder()
+                .result(variantService.getByMobilePhone_IdAndColor_Id(mobilePhoneId,colorId))
+                .build();
     }
 
 }
