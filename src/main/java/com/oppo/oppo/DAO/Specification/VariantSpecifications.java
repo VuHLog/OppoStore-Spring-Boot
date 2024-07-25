@@ -11,11 +11,11 @@ public class VariantSpecifications {
     public static Specification<Variants> equalRAM(int ram) {
         return (root, query, criteriaBuilder) ->{
             Join<Object, Object> join = root.join("mobilePhone", JoinType.INNER);
-            return criteriaBuilder.gt(join.get("RAM"), ram);
+            return criteriaBuilder.equal(join.get("RAM"), ram);
         };
     }
 
-    public static Specification<Variants> equalCharge(int charge) {
+    public static Specification<Variants> gtCharge(int charge) {
         return (root, query, criteriaBuilder) ->{
             Join<Object, Object> join = root.join("mobilePhone", JoinType.INNER);
             return criteriaBuilder.gt(join.get("charger"), charge);
@@ -25,7 +25,7 @@ public class VariantSpecifications {
     public static Specification<Variants> equalRom(int rom) {
         return (root, query, criteriaBuilder) -> {
             Join<Object, Object> join = root.join("ROM", JoinType.INNER);
-            return criteriaBuilder.gt(join.get("capacity"), rom);
+            return criteriaBuilder.equal(join.get("capacity"), rom);
         };
     }
 

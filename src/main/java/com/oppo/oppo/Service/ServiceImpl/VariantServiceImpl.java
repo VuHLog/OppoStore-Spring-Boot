@@ -39,7 +39,7 @@ public class VariantServiceImpl implements VariantService {
         }
 
         if (charge != null) {
-            specs = specs.and(VariantSpecifications.equalCharge(charge));
+            specs = specs.and(VariantSpecifications.gtCharge(charge));
         }
 
         Sort sortable = sort.equalsIgnoreCase("ASC") ? Sort.by(field).ascending() : Sort.by(field).descending();
