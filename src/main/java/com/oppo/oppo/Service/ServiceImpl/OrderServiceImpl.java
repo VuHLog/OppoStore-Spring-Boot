@@ -2,19 +2,26 @@ package com.oppo.oppo.Service.ServiceImpl;
 
 import com.oppo.oppo.DAO.OrderDetailRepository;
 import com.oppo.oppo.DAO.OrderRepository;
+import com.oppo.oppo.DTO.Request.OrderRequest;
 import com.oppo.oppo.DTO.Request.OrderStatusRequest;
 import com.oppo.oppo.DTO.Response.OrderDetailResponse;
 import com.oppo.oppo.DTO.Response.OrderResponse;
 import com.oppo.oppo.DTO.Response.OrderStatusResponse;
+import com.oppo.oppo.Entities.Customer;
 import com.oppo.oppo.Entities.Orders;
 import com.oppo.oppo.Mapper.OrderDetailMapper;
 import com.oppo.oppo.Mapper.OrderMapper;
 import com.oppo.oppo.Service.OrderService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -50,6 +57,21 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponse getById(String id) {
         return orderMapper.toOrderResponse(orderRepository.findById(id).get());
     }
+
+    @Transactional
+    @Override
+    public OrderResponse addOrder(OrderRequest request) {
+        Orders order = orderMapper.toOrder(request);
+
+        LocalDateTime localDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+        // Chuyển đổi LocalDateTime sang Timestamp
+        Timestamp timestamp = Timestamp.valueOf(localDateTime);
+
+        order.setCreatedTime(timestamp);
+        order.getOrderDetails().forEach(orderDetail -> orderDetail.setOrders(order));
+        return orderMapper.toOrderResponse(orderRepository.save(order));
+    }
+
     @Override
     public OrderStatusResponse updateOrderStatus(String orderId, OrderStatusRequest request) {
         Orders order = orderRepository.findById(orderId).get();

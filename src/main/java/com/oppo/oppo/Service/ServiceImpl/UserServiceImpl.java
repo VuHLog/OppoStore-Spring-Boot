@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponse getByUsername(String username) {
+        return userMapper.toUserResponse(usersRepository.findByUsername(username).get());
+    }
+
+    @Override
     public UserResponse addUser(UserCreationRequest request) {
         if(usersRepository.existsByUsername(request.getUsername()))
             throw new AppException(ErrorCode.USER_EXISTED);

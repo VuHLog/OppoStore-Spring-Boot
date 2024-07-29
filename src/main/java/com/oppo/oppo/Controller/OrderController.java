@@ -1,5 +1,6 @@
 package com.oppo.oppo.Controller;
 
+import com.oppo.oppo.DTO.Request.OrderRequest;
 import com.oppo.oppo.DTO.Request.OrderStatusRequest;
 import com.oppo.oppo.DTO.Response.ApiResponse;
 import com.oppo.oppo.DTO.Response.OrderDetailResponse;
@@ -56,6 +57,13 @@ public class OrderController {
     public ApiResponse<List<OrderDetailResponse>> getOrderDetailByOrderId(@PathVariable String orderId) {
         return ApiResponse.<List<OrderDetailResponse>>builder()
                 .result(orderService.getOrderDetails(orderId))
+                .build();
+    }
+
+    @PostMapping
+    public ApiResponse<OrderResponse> createOrder(@RequestBody OrderRequest request){
+        return ApiResponse.<OrderResponse>builder()
+                .result(orderService.addOrder(request))
                 .build();
     }
 

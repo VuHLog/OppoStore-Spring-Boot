@@ -29,15 +29,18 @@ public class Orders {
     @Column
     private String note;
 
+    @Column(name = "payment_method")
+    private String paymentMethod;
+
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH})
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orders", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH})
     @JsonIgnore
     private Set<OrderDetail> orderDetails;
 }

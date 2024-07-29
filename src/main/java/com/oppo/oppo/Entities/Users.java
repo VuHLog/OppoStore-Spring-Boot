@@ -37,9 +37,9 @@ public class Users {
 
     private String avatarUrl;
 
-    @OneToMany(mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     @JsonIgnore
-    private Set<Customer> customers;
+    private Customer customers;
 
 //    @OneToMany(mappedBy = "user" )
 //    @JsonIgnore

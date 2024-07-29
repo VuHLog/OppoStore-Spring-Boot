@@ -35,7 +35,7 @@ public class Customer {
     @JsonIgnore
     private Set<Orders> orders;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private Users user;
 }

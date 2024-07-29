@@ -14,16 +14,21 @@ import java.util.Set;
 
 @Component
 public class OrderMapperImpl implements OrderMapper{
-    public Orders toOrders(OrderRequest request) {
+    public Orders toOrder(OrderRequest request) {
         if ( request == null ) {
             return null;
         }
 
-        Orders.OrdersBuilder orders = Orders.builder();
+        Orders.OrdersBuilder order = Orders.builder();
 
-        orders.status( request.getStatus() );
+        order.paymentMethod(request.getPaymentMethod());
+        order.note(request.getNote());
+        order.totalPrice(request.getTotalPrice());
+        order.status( request.getStatus() );
+        order.orderDetails(request.getOrderDetails());
+        order.customer(request.getCustomer());
 
-        return orders.build();
+        return order.build();
     }
 
 

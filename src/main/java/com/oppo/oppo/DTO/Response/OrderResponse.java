@@ -22,6 +22,7 @@ public class OrderResponse {
     private String createdTime;
     private int totalPrice;
     private String note;
+    private String paymentMethod;
     private Status status;
     private Customer customer;
     private Set<OrderDetail> orderDetails;

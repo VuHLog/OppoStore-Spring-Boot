@@ -12,6 +12,8 @@ public interface UserService {
     public Page<UserResponse> getUsersContains(String s,Pageable pageable);
     public UserResponse getById(String id);
 
+    public UserResponse getByUsername(String username);
+
     public UserResponse addUser(UserCreationRequest request);
 
     public UserResponse updateUser(String userId, UserUpdateRequest request);

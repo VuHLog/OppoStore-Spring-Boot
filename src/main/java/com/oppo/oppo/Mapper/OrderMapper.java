@@ -5,10 +5,11 @@ import com.oppo.oppo.DTO.Request.OrderStatusRequest;
 import com.oppo.oppo.DTO.Response.OrderResponse;
 import com.oppo.oppo.DTO.Response.OrderStatusResponse;
 import com.oppo.oppo.Entities.Orders;
+import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
 public interface OrderMapper {
-    Orders toOrders(OrderRequest request);
-    Orders toOrdersStatus(OrderStatusRequest request);
+    Orders toOrder(OrderRequest request);
 
     OrderResponse toOrderResponse(Orders order);
     OrderStatusResponse toOrderStatusResponse(Orders order);

@@ -1,5 +1,6 @@
 package com.oppo.oppo.Service;
 
+import com.oppo.oppo.DTO.Request.OrderRequest;
 import com.oppo.oppo.DTO.Request.OrderStatusRequest;
 import com.oppo.oppo.DTO.Response.OrderDetailResponse;
 import com.oppo.oppo.DTO.Response.OrderResponse;
@@ -15,6 +16,8 @@ public interface OrderService {
     public Page<OrderResponse> getOrdersByStatus(String status, Pageable pageable);
 
     public OrderResponse getById(String id) ;
+
+    public OrderResponse addOrder(OrderRequest request);
     public OrderStatusResponse updateOrderStatus(String orderId, OrderStatusRequest request);
 
     public List<OrderDetailResponse> getOrderDetails(String orderId);
