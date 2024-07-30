@@ -39,13 +39,13 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailMapper orderDetailMapper;
 
     @Override
-    public Page<OrderResponse> getOrders(Pageable pageable) {
-        return orderRepository.findAll(pageable).map(orderMapper::toOrderResponse);
+    public Page<OrderResponse> getOrders(String customerId,Pageable pageable) {
+        return orderRepository.findByCustomer_Id(customerId, pageable).map(orderMapper::toOrderResponse);
     }
 
     @Override
-    public Page<OrderResponse> getOrdersByStatus(String status, Pageable pageable) {
-        return orderRepository.findByStatus_Status(status,pageable).map(orderMapper::toOrderResponse);
+    public Page<OrderResponse> getOrdersByStatus(String status,String customerId, Pageable pageable) {
+        return orderRepository.findByCustomer_IdAndStatus_Status(status,customerId,pageable).map(orderMapper::toOrderResponse);
     }
 
 //    @Override

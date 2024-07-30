@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface OrderRepository extends JpaRepository<Orders, String> {
-    Page<Orders> findByStatus_Status(String status, Pageable pageable);
+    Page<Orders> findByCustomer_IdAndStatus_Status(String id, String status, Pageable pageable);
+
+    Page<Orders> findByCustomer_Id(String id, Pageable pageable);
 }

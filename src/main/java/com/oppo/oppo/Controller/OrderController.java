@@ -29,7 +29,8 @@ public class OrderController {
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
             @RequestParam(name = "sort", required = false, defaultValue = "DESC") String sort,
             @RequestParam(name = "search", required = false, defaultValue = "") String search,
-            @RequestParam(name = "status", required = false, defaultValue = "") String status
+            @RequestParam(name = "status", required = false, defaultValue = "") String status,
+            @RequestParam(name = "customerId", required = true, defaultValue = "") String customerId
     ) {
 
         Sort sortable = sort.equalsIgnoreCase("ASC") ? Sort.by(field).ascending() : Sort.by(field).descending();
@@ -37,12 +38,12 @@ public class OrderController {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, sortable);
         Page<OrderResponse> orders = null;
         if(!status.isEmpty()){
-            orders = orderService.getOrdersByStatus(status,pageable);
+            orders = orderService.getOrdersByStatus(status, customerId, pageable);
             return orders;
         }
         if (!search.trim().equals("")) {
 //            orders = orderService.getOrdersContains(search, pageable);
-        } else orders = orderService.getOrders(pageable);
+        } else orders = orderService.getOrders(customerId, pageable);
         return orders;
     }
 
