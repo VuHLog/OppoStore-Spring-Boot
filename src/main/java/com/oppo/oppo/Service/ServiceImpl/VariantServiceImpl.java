@@ -24,7 +24,7 @@ public class VariantServiceImpl implements VariantService {
     @Autowired
     private VariantMapper variantMapper;
     @Override
-    public Page<VariantResponse> getVariants(String field, Integer pageNumber, Integer pageSize, String sort, Integer smallPrice, Integer bigPrice, Integer ram, Integer rom, Integer charge) {
+    public Page<VariantResponse> getVariants(String field, Integer pageNumber, Integer pageSize, String sort, Integer smallPrice, Integer bigPrice, Integer ram, Integer rom, Integer charge,String searchText) {
         Specification<Variants> specs = Specification.where(null);
         if (smallPrice != null || bigPrice !=null) {
             specs = specs.and(VariantSpecifications.betweenPrice(smallPrice,bigPrice));
@@ -40,6 +40,10 @@ public class VariantServiceImpl implements VariantService {
 
         if (charge != null) {
             specs = specs.and(VariantSpecifications.gtCharge(charge));
+        }
+
+        if(searchText != null && !searchText.isEmpty()){
+            specs = specs.and(VariantSpecifications.equalName(searchText));
         }
 
         Sort sortable = sort.equalsIgnoreCase("ASC") ? Sort.by(field).ascending() : Sort.by(field).descending();

@@ -42,4 +42,11 @@ public class VariantSpecifications {
         };
     }
 
+    public static Specification<Variants> equalName(String searchText) {
+        return (root, query, criteriaBuilder) -> {
+            Join<Object, Object> join = root.join("mobilePhone", JoinType.INNER);
+            return criteriaBuilder.like(join.get("name"), "%" + searchText + "%" );
+        };
+    }
+
 }

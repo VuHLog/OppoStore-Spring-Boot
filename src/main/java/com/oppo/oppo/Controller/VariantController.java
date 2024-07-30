@@ -24,6 +24,7 @@ public class VariantController {
             @RequestParam(name = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
             @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
             @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort,
+            @RequestParam(name = "searchText", required = false, defaultValue = "") String searchText,
             @RequestParam(name = "smallPrice", required = false, defaultValue = "") Integer smallPrice,
             @RequestParam(name = "bigPrice", required = false, defaultValue = "") Integer bigPrice,
             @RequestParam(name = "ram", required = false, defaultValue = "") Integer ram,
@@ -31,7 +32,7 @@ public class VariantController {
             @RequestParam(name = "charge", required = false, defaultValue = "") Integer charge
     ) {
 
-        return variantService.getVariants(field,pageNumber,pageSize,sort, smallPrice, bigPrice,ram,rom,charge);
+        return variantService.getVariants(field,pageNumber,pageSize,sort, smallPrice, bigPrice,ram,rom,charge,searchText);
     }
 
     @GetMapping("/{variantId}")
