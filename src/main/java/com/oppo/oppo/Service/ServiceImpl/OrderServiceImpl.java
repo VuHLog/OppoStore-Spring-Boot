@@ -69,6 +69,7 @@ public class OrderServiceImpl implements OrderService {
 
         order.setCreatedTime(timestamp);
         order.getOrderDetails().forEach(orderDetail -> orderDetail.setOrders(order));
+        order.setPaymentStatus(0);
         return orderMapper.toOrderResponse(orderRepository.save(order));
     }
 
@@ -77,6 +78,13 @@ public class OrderServiceImpl implements OrderService {
         Orders order = orderRepository.findById(orderId).get();
         orderMapper.updateOrderStatus(order, request);
         return orderMapper.toOrderStatusResponse(orderRepository.saveAndFlush(order));
+    }
+
+    @Override
+    public OrderResponse updatePaymentMethod(String orderId,int paymentStatus) {
+        Orders order = orderRepository.findById(orderId).get();
+        order.setPaymentStatus(paymentStatus);
+        return orderMapper.toOrderResponse(orderRepository.saveAndFlush(order));
     }
 
     @Override

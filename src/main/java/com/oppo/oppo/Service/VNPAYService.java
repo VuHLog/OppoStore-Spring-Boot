@@ -9,5 +9,5 @@ import java.io.UnsupportedEncodingException;
 public interface VNPAYService {
     public VNPayResponse createPayment(HttpServletRequest req,long price,String orderId) throws UnsupportedEncodingException;
 
-    public TransactionStatusPaymentResponse getTransaction(String responseCode, String orderInfo);
+    public TransactionStatusPaymentResponse getTransaction(String responseCode, String orderInfo,String orderId);
 }

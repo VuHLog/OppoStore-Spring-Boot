@@ -25,5 +25,6 @@ public class OrderResponse {
     private String paymentMethod;
     private Status status;
     private Customer customer;
+    private int paymentStatus;
     private Set<OrderDetail> orderDetails;
 }

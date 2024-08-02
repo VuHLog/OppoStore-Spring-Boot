@@ -32,6 +32,9 @@ public class Orders {
     @Column(name = "payment_method")
     private String paymentMethod;
 
+    @Column(name = "payment_status")
+    private int paymentStatus;
+
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;

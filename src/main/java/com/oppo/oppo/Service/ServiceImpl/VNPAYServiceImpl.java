@@ -1,10 +1,13 @@
 package com.oppo.oppo.Service.ServiceImpl;
 
 import com.oppo.oppo.Configuration.VNPAYConfig;
+import com.oppo.oppo.DAO.OrderRepository;
 import com.oppo.oppo.DTO.Response.TransactionStatusPaymentResponse;
 import com.oppo.oppo.DTO.Response.VNPayResponse;
+import com.oppo.oppo.Entities.Orders;
 import com.oppo.oppo.Service.VNPAYService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -15,13 +18,16 @@ import java.util.*;
 
 @Service
 public class VNPAYServiceImpl implements VNPAYService {
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Override
     public VNPayResponse createPayment(HttpServletRequest req,long price,String orderId) throws UnsupportedEncodingException {
         String orderType = "other";
         long amount = price*100;
 //        String bankCode = req.getParameter("bankCode");
 
-        String vnp_TxnRef = orderId;
+        String vnp_TxnRef = VNPAYConfig.getRandomNumber(8);
         String vnp_IpAddr = VNPAYConfig.getIpAddress(req);
 
         String vnp_TmnCode = VNPAYConfig.vnp_TmnCode;
@@ -54,7 +60,7 @@ public class VNPAYServiceImpl implements VNPAYService {
 //        }
         vnp_Params.put("vnp_Locale", "vn");
 
-        vnp_Params.put("vnp_ReturnUrl", VNPAYConfig.vnp_ReturnUrl);
+        vnp_Params.put("vnp_ReturnUrl", VNPAYConfig.vnp_ReturnUrl + "/"+orderId);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
@@ -102,21 +108,25 @@ public class VNPAYServiceImpl implements VNPAYService {
     }
 
     @Override
-    public TransactionStatusPaymentResponse getTransaction(String responseCode, String orderInfo) {
+    public TransactionStatusPaymentResponse getTransaction(String responseCode, String orderInfo, String orderId) {
         TransactionStatusPaymentResponse transactionStatusPaymentResponse = new TransactionStatusPaymentResponse();
+        Orders orders = orderRepository.findById(orderId).get();
         if(responseCode.equals("00")){
             transactionStatusPaymentResponse = TransactionStatusPaymentResponse.builder()
                     .status("OK")
                     .message("Successfully")
                     .data(orderInfo)
                     .build();
+            orders.setPaymentStatus(1);
         }else {
             transactionStatusPaymentResponse = TransactionStatusPaymentResponse.builder()
                     .status("NO")
                     .message("Failed")
                     .data(orderInfo)
                     .build();
+            orders.setPaymentStatus(0);
         }
+        orderRepository.saveAndFlush((orders));
         return  transactionStatusPaymentResponse;
     }
 }

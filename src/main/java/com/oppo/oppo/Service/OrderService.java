@@ -20,5 +20,7 @@ public interface OrderService {
     public OrderResponse addOrder(OrderRequest request);
     public OrderStatusResponse updateOrderStatus(String orderId, OrderStatusRequest request);
 
+    public OrderResponse updatePaymentMethod(String orderId,int paymentStatus);
+
     public List<OrderDetailResponse> getOrderDetails(String orderId);
 }

@@ -58,6 +58,8 @@ public class OrderMapperImpl implements OrderMapper{
         orderResponse.note( order.getNote() );
         orderResponse.status( order.getStatus() );
         orderResponse.customer( order.getCustomer() );
+        orderResponse.paymentMethod(order.getPaymentMethod());
+        orderResponse.paymentStatus(order.getPaymentStatus());
         Set<OrderDetail> set = order.getOrderDetails();
         if ( set != null ) {
             orderResponse.orderDetails( new LinkedHashSet<OrderDetail>( set ) );

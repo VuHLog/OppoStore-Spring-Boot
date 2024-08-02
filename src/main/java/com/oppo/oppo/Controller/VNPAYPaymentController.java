@@ -29,14 +29,14 @@ public class VNPAYPaymentController {
                 .build();
     }
 
-    @GetMapping("/payment-info")
+    @GetMapping("/payment-info/{orderId}")
     public ApiResponse<TransactionStatusPaymentResponse> transaction(
             @RequestParam(name = "vnp_ResponseCode") String vnp_ResponseCode,
             @RequestParam(name = "vnp_OrderInfo") String vnp_OrderInfo,
-            @RequestParam(name = "vnp_TxnRef") String orderId
+            @PathVariable String orderId
     ){
         return ApiResponse.<TransactionStatusPaymentResponse>builder()
-                .result(vnpayService.getTransaction(vnp_ResponseCode,vnp_OrderInfo))
+                .result(vnpayService.getTransaction(vnp_ResponseCode,vnp_OrderInfo,orderId))
                 .build();
     }
 }
