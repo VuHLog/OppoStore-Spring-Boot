@@ -43,5 +43,12 @@ jwt:
   valid-duration: 36000 # in second .
   refreshable-duration: 360000 # in seconds .
 
+springdoc:
+  swagger-ui:
+    operations-sorter: method #sort by http method
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+
 
 
