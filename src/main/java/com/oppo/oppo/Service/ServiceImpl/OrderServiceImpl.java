@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderResponse> getOrdersByStatus(String status,String customerId, Pageable pageable) {
-        return orderRepository.findByCustomer_IdAndStatus_Status(status,customerId,pageable).map(orderMapper::toOrderResponse);
+        return orderRepository.findByCustomer_IdAndStatus_Status(customerId,status,pageable).map(orderMapper::toOrderResponse);
     }
 
 //    @Override

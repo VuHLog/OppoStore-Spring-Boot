@@ -8,10 +8,10 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   datasource:
-    url: "jdbc:sqlserver://localhost:1433;databaseName=oppoStore;encrypt=true;trustServerCertificate=true;"
-    driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    username: spring
-    password: 123
+    url: "jdbc:mysql://localhost:3306/oppoStore"
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
